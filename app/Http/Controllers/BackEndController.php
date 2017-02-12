@@ -8,7 +8,12 @@ use DB;
 class BackEndController extends Controller
 {
     public function getNews(){
-        $noticias = DB::table('posts')->get();
+        $noticias = DB::table('posts')->orderBy('id', 'desc')->get();
+        return response()->json($noticias);
+    }
+
+    public function getTendencia(){
+        $noticias = DB::table('posts')->limit(3)->orderBy('visitas', 'desc')->get();
         return response()->json($noticias);
     }
 }

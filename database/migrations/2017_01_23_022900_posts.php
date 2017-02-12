@@ -18,8 +18,13 @@ class Posts extends Migration
             $table->string('titulo');
             $table->string('hora');
             $table->string('autor');
+            $table->string('resumen', 1000);
             $table->string('contenido', 1000);
             $table->string('imagen');
+            $table->string('imgmini');
+            $table->integer('visitas');
+            $table->string('programada');
+            $table->string('status');
             $table->timestamps();
         });
     }
