@@ -16,4 +16,9 @@ class BackEndController extends Controller
         $noticias = DB::table('posts')->limit(3)->orderBy('visitas', 'desc')->get();
         return response()->json($noticias);
     }
+
+    public function getLeftNews(){
+        $noticias = DB::table('posts')->skip(3)->take(3)->orderBy('id', 'desc')->get();
+        return response()->json($noticias);
+    }
 }
