@@ -21,4 +21,10 @@ class BackEndController extends Controller
         $noticias = DB::table('posts')->skip(3)->take(3)->orderBy('id', 'desc')->get();
         return response()->json($noticias);
     }
+
+    public function getNoticia(Request $request){
+        $id = $request->input('id');
+        $noticias = DB::table('posts')->where('id', '=', $id)->get();
+        return response()->json($noticias);
+    }
 }

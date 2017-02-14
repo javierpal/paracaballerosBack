@@ -21,3 +21,4 @@ Route::get('/', function () {
 Route::get('/getNews','BackEndController@getNews');
 Route::get('/getTendencia','BackEndController@getTendencia');
 Route::get('/getLeftNews','BackEndController@getLeftNews');
+Route::get('/getNoticia','BackEndController@getNoticia');
