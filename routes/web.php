@@ -22,3 +22,5 @@ Route::get('/getNews','BackEndController@getNews');
 Route::get('/getTendencia','BackEndController@getTendencia');
 Route::get('/getLeftNews','BackEndController@getLeftNews');
 Route::get('/getNoticia','BackEndController@getNoticia');
+Route::get('/Autenticate','BackEndController@Autenticate');
+Route::get('/findAdmin','BackEndController@findAdmin');
