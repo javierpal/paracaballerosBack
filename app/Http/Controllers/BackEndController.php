@@ -9,6 +9,7 @@ use App\User;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Controllers\Controller;
+use File;
 
 class BackEndController extends Controller
 {
@@ -31,6 +32,44 @@ class BackEndController extends Controller
         $id = $request->input('id');
         $noticias = DB::table('posts')->where('id', '=', $id)->get();
         return response()->json($noticias);
+    }
+
+    public function uploadFile(Request $request){
+        if($request->hasFile('file')){
+
+            $file = $request->file('file');
+            if ($file->isValid()) {
+                
+                $extension = $file->clientExtension();
+                $originalName = $file->getClientOriginalName();
+                
+                
+                $fileName = rand(11111,99999).'.'.$extension;
+                $month = date('M');
+                $year = date("Y");
+                
+                $destinationPath = public_path()."/uploads/".$year."/".$month;
+                if (!file_exists($destinationPath)) {
+                    File::makeDirectory($destinationPath, 0775, true, true);
+                }
+                
+                $file->move($destinationPath, $fileName);
+
+                $lastdestination = $destinationPath."/".$fileName;
+                
+                $date = (new \DateTime())->format('Y-m-d H:i:s');
+                $fileId = DB::table('archivos')->insertGetId(
+                    ['post_id' => '1', 'ruta' => $lastdestination, 'nombre' => $originalName, 'created_at' => $date, 'updated_at' => $date]
+                );
+                
+                $registerFile = DB::table('archivos')
+                ->where('id', '=', $fileId)
+                ->get();
+                
+                return response()->json($registerFile);
+                
+            }else{return "El Archivo no se Subio Correctamente";}
+        }else{return "No hay Archivo en la Solicitud";}
     }
 
     public function Autenticate(Request $request){

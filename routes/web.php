@@ -24,3 +24,4 @@ Route::get('/getLeftNews','BackEndController@getLeftNews');
 Route::get('/getNoticia','BackEndController@getNoticia');
 Route::get('/Autenticate','BackEndController@Autenticate');
 Route::get('/findAdmin','BackEndController@findAdmin');
+Route::post('/uploadFile','BackEndController@uploadFile');
